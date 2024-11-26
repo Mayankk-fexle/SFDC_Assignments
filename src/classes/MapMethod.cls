@@ -1,6 +1,6 @@
-public with sharing class MyClass 
+public with sharing class MapMethod 
 {
-    public MyClass() 
+    public MapMethod() 
     {
         List<String> sales = new List<String>{'Katrina' , 'Kiara' , 'Alia'};
         List<String> hr = new List<String>{'Gopi' , 'Uday' , 'Sid'};
@@ -15,5 +15,3 @@ public with sharing class MyClass
         System.debug('Department Employees List ' + myTeam);
     }
 }
-
-MyClass team = new MyClass();

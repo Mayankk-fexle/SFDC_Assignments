@@ -1,6 +1,6 @@
-public with sharing class newclass 
+public with sharing class ListMethod 
 {
-    public newclass() 
+    public ListMethod() 
     {
         List<integer> l2 = new List<integer>();
         for(Integer i = 1; i<=10;i++)
@@ -12,4 +12,3 @@ public with sharing class newclass
         System.debug('Sorted List = ' + l2);
     }
 }
-newclass n1 = new newclass();

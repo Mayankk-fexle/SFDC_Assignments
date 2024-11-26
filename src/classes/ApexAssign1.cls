@@ -1,5 +1,5 @@
 public with sharing class ApexAssign1 {
-    public ApexAssign1() {
+    public listImplement() {
 
         System.debug('=================================== MAP METHOD ==========================================');
 
@@ -14,29 +14,32 @@ public with sharing class ApexAssign1 {
         myTeam.put('Tech' , tech);
     
         System.debug('Department Employees List ' + myTeam);
-        
+    }
+    
+    public setImplement() {
+
         System.debug('=================================== SET METHOD ==========================================');
 
         Set<String> set1 = new Set<String>{'Amit', 'Varun', 'Sid', 'Kiara', 'Dev'};
         Set<String> set2 = new Set<String>{'Akshay', 'Salman', 'Alia', 'Amit', 'Dev'};
 
-        Set<String> UnionSet = new Set<String>();
-        UnionSet.addAll(set1);
-        UnionSet.addAll(set2);
+        Set<String> unionSet = new Set<String>();
+        unionSet.addAll(set1);
+        unionSet.addAll(set2);
 
-        Set<String> IntersectionSet = new Set<String>(set1);
-        IntersectionSet.retainAll(set2);
+        Set<String> intersectionSet = new Set<String>(set1);
+        intersectionSet.retainAll(set2);
 
-        Set<String> DifferenceSet1 = new Set<String>(set1);
-        DifferenceSet1.removeAll(set2);
+        Set<String> diffSet1 = new Set<String>(set1);
+        diffSet1.removeAll(set2);
 
-        Set<String> DifferenceSet2 = new Set<String>(set2);
-        DifferenceSet2.removeAll(set1);
+        Set<String> diffSet2 = new Set<String>(set2);
+        diffSet2.removeAll(set1);
         
-        System.debug('Union: ' + UnionSet);
-        System.debug('Intersection: ' + IntersectionSet);
-        System.debug('Difference (A - B): ' + DifferenceSet1);
-        System.debug('Difference (B - A): ' + DifferenceSet2);
+        System.debug('Union: ' + unionSet);
+        System.debug('Intersection: ' + intersectionSet);
+        System.debug('Difference (A - B): ' + diffSet1);
+        System.debug('Difference (B - A): ' + diffSet2);
 
         System.debug('=================================== LIST METHOD ==========================================');
         
@@ -50,5 +53,3 @@ public with sharing class ApexAssign1 {
         System.debug('Sorted List = ' + l2);
     }
 }
-
-ApexAssign1 obj = new ApexAssign1();
