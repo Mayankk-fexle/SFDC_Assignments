@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Label_for_Seminar</fullName>
+        <categories>Training Sessions</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Seminar</shortDescription>
+        <value>Attend our Guest Lectures to know more</value>
+    </labels>
+    <labels>
+        <fullName>Label_for_Webinar</fullName>
+        <categories>Training Sessions</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Webinar</shortDescription>
+        <value>Join the link and connect with experts on Webinar</value>
+    </labels>
+    <labels>
+        <fullName>Label_for_Workshop</fullName>
+        <categories>Training Sessions</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Workshop</shortDescription>
+        <value>Come at our Workstation and explore hidden gems</value>
+    </labels>
+</CustomLabels>
