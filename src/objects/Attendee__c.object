@@ -158,33 +158,53 @@
         <externalId>false</externalId>
         <label>Aadhar Number</label>
         <precision>18</precision>
-        <required>true</required>
+        <required>false</required>
         <scale>0</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Attendee_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Contact__r.Salutation) + &apos; &apos; + Contact__r.FirstName + &apos; &apos; + Contact__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Attendee Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Attendees</relationshipLabel>
+        <relationshipName>Attendees</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Email__c</fullName>
         <externalId>false</externalId>
         <label>Email</label>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Email</type>
         <unique>false</unique>
     </fields>
     <fields>
         <fullName>Phone__c</fullName>
-        <externalId>false</externalId>
         <label>Phone</label>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Phone</type>
     </fields>
     <fields>
-        <fullName>Venue__c</fullName>
-        <externalId>false</externalId>
-        <label>Venue</label>
+        <fullName>Session_Name__c</fullName>
+        <label>Session Name</label>
         <referenceTo>Training_Session__c</referenceTo>
         <relationshipLabel>Attendees</relationshipLabel>
         <relationshipName>Attendees</relationshipName>
@@ -197,12 +217,18 @@
     <label>Attendee</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Aadhar_Number__c</columns>
+        <columns>Email__c</columns>
+        <columns>Phone__c</columns>
+        <columns>Session_Name__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <nameField>
-        <label>Attendee Name</label>
-        <type>Text</type>
+        <displayFormat>ATT#{0000}</displayFormat>
+        <label>Attendee ID</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Attendees</pluralLabel>
     <searchLayouts/>

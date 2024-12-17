@@ -192,7 +192,6 @@
     </fields>
     <fields>
         <fullName>Session_Date__c</fullName>
-        <externalId>false</externalId>
         <label>Session Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -201,9 +200,8 @@
     </fields>
     <fields>
         <fullName>TotalAttendee__c</fullName>
-        <externalId>false</externalId>
         <label>Total Attendee</label>
-        <summaryForeignKey>Attendee__c.Venue__c</summaryForeignKey>
+        <summaryForeignKey>Attendee__c.Session_Name__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -211,7 +209,6 @@
     </fields>
     <fields>
         <fullName>Total_Rating_Score__c</fullName>
-        <externalId>false</externalId>
         <label>Total Rating Score</label>
         <summarizedField>Feedback__c.Rating__c</summarizedField>
         <summaryFilterItems>
@@ -227,7 +224,6 @@
     </fields>
     <fields>
         <fullName>Total_feedback_record__c</fullName>
-        <externalId>false</externalId>
         <label>Total feedback record</label>
         <summaryFilterItems>
             <field>Feedback__c.Rating__c</field>
@@ -242,7 +238,6 @@
     </fields>
     <fields>
         <fullName>Webinar_Link__c</fullName>
-        <externalId>false</externalId>
         <label>Webinar Link</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -253,20 +248,39 @@
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
+        <columns>Session_Date__c</columns>
+        <columns>Location__c</columns>
+        <columns>Webinar_Link__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Average_Rating__c</columns>
+        <columns>TotalAttendee__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
+    <listViews>
+        <fullName>With_Full_Detail</fullName>
+        <columns>NAME</columns>
+        <columns>Session_Date__c</columns>
+        <columns>Location__c</columns>
+        <columns>Webinar_Link__c</columns>
+        <columns>Average_Rating__c</columns>
+        <columns>TotalAttendee__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>With Full Detail</label>
+    </listViews>
     <nameField>
-        <label>Training Session Name</label>
+        <label>Session Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
     <pluralLabel>Training Sessions</pluralLabel>
     <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
-        <fullName>Already_attended</fullName>
+        <fullName>Seminar</fullName>
         <active>true</active>
-        <label>Already attended</label>
+        <label>Seminar</label>
     </recordTypes>
     <recordTypes>
         <fullName>Webinar</fullName>
@@ -280,5 +294,12 @@
     </recordTypes>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Session_Date_Check</fullName>
+        <active>true</active>
+        <errorConditionFormula>Session_Date__c &lt;  TODAY()</errorConditionFormula>
+        <errorDisplayField>Session_Date__c</errorDisplayField>
+        <errorMessage>Session Date can&apos;t be in Past</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>
