@@ -1,0 +1,22 @@
+trigger EventTrigger on Event (before insert, before update, before delete, after insert, after update, after delete, after undelete) 
+{
+    if(Trigger.isAfter)
+    {
+        if(Trigger.isInsert)
+        {
+            EventTriggerHandler.rollUpOnAccount(Trigger.new, Trigger.oldMap);
+        }
+        if(Trigger.isUpdate)
+        {
+            EventTriggerHandler.rollUpOnAccount(Trigger.new, Trigger.oldMap);            
+        }
+        if(Trigger.isDelete)
+        {
+            EventTriggerHandler.rollUpOnAccount(Trigger.old, Trigger.oldMap);            
+        }
+        if(Trigger.isUndelete)
+        {
+            EventTriggerHandler.rollUpOnAccount(Trigger.new, Trigger.oldMap);            
+        }
+    }
+}
