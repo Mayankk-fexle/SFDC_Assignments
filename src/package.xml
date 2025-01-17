@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>Attendee__c.Aadhar_Number__c</members>
+		<members>Attendee__c.Email__c</members>
+		<members>Attendee__c.Phone__c</members>
+		<members>Attendee__c.Venue__c</members>
+		<members>Feedback__c.Comment__c</members>
+		<members>Feedback__c.Rating__c</members>
+		<members>Feedback__c.Session__c</members>
+		<members>Training_Session__c.Average_Rating__c</members>
+		<members>Training_Session__c.Employee_ID__c</members>
+		<members>Training_Session__c.Location__c</members>
+		<members>Training_Session__c.Session_Date__c</members>
+		<members>Training_Session__c.TotalAttendee__c</members>
+		<members>Training_Session__c.Total_Rating_Score__c</members>
+		<members>Training_Session__c.Total_feedback_record__c</members>
+		<members>Training_Session__c.Webinar_Link__c</members>
+		<name>CustomField</name>
+	</types>
+	<version>60.0</version>
+</Package>
