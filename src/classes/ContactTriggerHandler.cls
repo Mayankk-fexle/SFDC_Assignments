@@ -15,6 +15,8 @@ public with Sharing class ContactTriggerHandler extends TriggerHandler
     Map<Id, Contact> conOldMap;
     
     public static String errorMessage = 'Email does not match the Related Account Domain';
+    
+    public static String errMsg = 'RecordID does not exist, Please enter a valid RecordID';
 
     public ContactTriggerHandler()
     {
@@ -26,11 +28,13 @@ public with Sharing class ContactTriggerHandler extends TriggerHandler
 	
     public override void beforeInsert() 
     {
-		ContactTriggerHandler.matchContactEmail(conNewList);        				
+		ContactTriggerHandler.matchContactEmail(conNewList);
+        ContactTriggerHandler.populateObjectAndPicklist(conNewList);
     }
     public override void beforeUpdate() 
     {
 		ContactTriggerHandler.matchContactEmail(conNewList);
+        ContactTriggerHandler.populateObjectAndPicklist(conNewList);
     }
     /*
     public override void beforeDelete() 
@@ -55,6 +59,7 @@ public with Sharing class ContactTriggerHandler extends TriggerHandler
     }
 	*/
 
+    
     /* 
         Purpose : Trigger Logic(To check if the Email in new Contacts match with the Domain__c of the associated Accounts)
         Created By : Mayank Mathur(mayank.mathur@fexle.com)
@@ -81,6 +86,80 @@ public with Sharing class ContactTriggerHandler extends TriggerHandler
                (!con.Email.endsWith((accMapForNewContacts.get(con.AccountId).Domain__c))))
             {
 				con.Email.addError(errorMessage);
+            }
+        }
+    }
+    
+    /* 
+        Purpose : Trigger Logic(To populate the picklist_fields__c & Object_Name__c with the RecordID__c custom field)
+        Created By : Mayank Mathur(mayank.mathur@fexle.com)
+        Created Date : 02/01/2025
+    */ 
+    public static void populateObjectAndPicklist(List<Contact> conList)
+    {
+        //Check if new records are present
+        if(!conList.isEmpty())
+        {
+            for(Contact con : conList)
+            {
+                //Check if current record has RecordID or not
+                if(!String.isEmpty(con.RecordID__c)) 
+                { 
+                    try
+                    {
+                        if(Id.valueOf(con.RecordID__c).getSObjectType() != null)
+                        {
+                            //Store Record ID in variable of type Id
+                            Id recordId;
+                            recordId = Id.valueOf(con.RecordID__c); 
+                            
+                            //Get Object Name of that Id
+                            SobjectType SObjectName = recordId.getSObjectType();
+                            
+                            //List to store picklist field names
+                            List<string> picklistfields = new List<string>();
+                            
+                            //Get all Metadata of the particular Object Name
+                            Schema.DescribeSObjectResult sObjectDescribe = SObjectName.getDescribe(); 
+                            
+                            // Iterate through the fields of the sObject 
+                            for (Schema.SObjectField field : sObjectDescribe.fields.getMap().values()) 
+                            { 
+                                //Get information about the current field value
+                                Schema.DescribeFieldResult fieldDescribe = field.getDescribe(); 
+                                
+                                // Check if the field is a picklist 
+                                if (fieldDescribe.getType() == Schema.DisplayType.Picklist) 
+                                { 
+                                    // Print the picklist field name 
+                                    picklistfields.add(fieldDescribe.getName());
+                                } 
+                            }
+                            
+                            //Updating value of Object in the field
+                            con.Object_Name__c = ((Id)recordId).getSobjectType().getDescribe().getName();
+                            
+                            //Adding picklist field names in seperate lines
+                            if(!picklistfields.isEmpty())
+                            {
+                                con.Picklist_Fields__c = '';
+                                for(String val : picklistfields)
+                                {
+                                    con.Picklist_Fields__c += val + '\n';       
+                                }
+                            }
+                            //If there are no picklist fields, set the field empty
+                            else
+                            {
+                                con.Picklist_Fields__c = '';
+                            }
+                    	}
+                    }
+                    catch(Exception e)
+                    {
+                        con.addError(errMsg);
+                    }
+                }
             }
         }
     }
